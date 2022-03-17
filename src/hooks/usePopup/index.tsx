@@ -35,6 +35,7 @@ const usePopup = () => {
     }
 
     const handleCancle = () => {
+      outAnimation(container.current, content.current)
       setTimeout(() => {
         ReactDOM.unmountComponentAtNode(node)
         deferred.resolve(false)
