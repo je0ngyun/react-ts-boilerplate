@@ -1,14 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import GlobalStyle from '@styles/global'
-import Theme from '@styles/theme'
+import { useRecoilState } from 'recoil'
+import { ThemeFlag, themeState } from '@store/theme'
+import { lightTheme, darkTheme } from '@styles/theme'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-
+import { getThemeFromStorage } from '@utils/storage'
 import Router from './routes/Router'
+
 function App() {
+  const [currentTheme, setCurrentTheme] = useRecoilState(themeState)
+  const theme = currentTheme === ThemeFlag.light ? lightTheme : darkTheme
+
+  useEffect(() => {
+    const storageTheme = getThemeFromStorage()
+    if (storageTheme !== undefined) {
+      setCurrentTheme(storageTheme)
+    }
+  }, [])
   return (
     <>
-      <ThemeProvider theme={Theme}>
+      <ThemeProvider theme={theme}>
         <GlobalStyle />
         <BrowserRouter>
           <Router />

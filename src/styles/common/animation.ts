@@ -1,9 +1,9 @@
 import { keyframes } from 'styled-components'
 import { Unit } from '@karibash/pixel-units'
 
-type slideKeyframeUnit = Unit<'px'> | Unit<'%'>
+type SlideKeyframeUnit = Unit<'px'> | Unit<'%'>
 
-export const slideUp = (y: slideKeyframeUnit) => keyframes`
+export const slideUp = (y: SlideKeyframeUnit) => keyframes`
   from {
     transform: translateY(${y});
   }
@@ -12,7 +12,7 @@ export const slideUp = (y: slideKeyframeUnit) => keyframes`
   }
 `
 
-export const slideDown = (y: slideKeyframeUnit) => keyframes`
+export const slideDown = (y: SlideKeyframeUnit) => keyframes`
     0% {
         transform : translateY(0px) 
     }

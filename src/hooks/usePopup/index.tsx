@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
 import ReactDOM from 'react-dom'
-import { StPopupContainer, StPopup } from './style'
 import Deffered from '@utils/deferred'
+import Popup from '@components/Popup'
 
-interface PopupProps {
+interface OpenProps {
   render: JSX.Element
   cancelButton?: boolean
 }
@@ -20,7 +20,7 @@ const usePopup = () => {
   const container = useRef<HTMLDivElement>(null)
   const content = useRef<HTMLDivElement>(null)
 
-  const openPopup = async ({ render, cancelButton = true }: PopupProps) => {
+  const openPopup = async ({ render, cancelButton = true }: OpenProps) => {
     const deferred = new Deffered()
     const node = document.createElement('div')
     document.body.appendChild(node)
@@ -43,19 +43,17 @@ const usePopup = () => {
       }, 220)
     }
 
-    const PopupContent = () => {
-      return (
-        <StPopupContainer ref={container}>
-          <StPopup ref={content}>
-            {render && <div>{render}</div>}
-            <button onClick={handleConfirm}>확인</button>
-            {cancelButton && <button onClick={handleCancle}>취소</button>}
-          </StPopup>
-        </StPopupContainer>
-      )
-    }
-
-    ReactDOM.render(<PopupContent />, node)
+    ReactDOM.render(
+      <Popup
+        render={render}
+        cancelButton={cancelButton}
+        containerRef={container}
+        contentRef={content}
+        handleCancle={handleCancle}
+        handleConfirm={handleConfirm}
+      />,
+      node
+    )
     return await deferred
   }
   return openPopup
