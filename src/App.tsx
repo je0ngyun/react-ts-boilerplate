@@ -6,11 +6,14 @@ import { lightTheme, darkTheme } from '@styles/theme'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { getThemeFromStorage } from '@utils/storage'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import Router from './routes/Router'
 
 function App() {
   const [currentTheme, setCurrentTheme] = useRecoilState(themeState)
   const theme = currentTheme === ThemeFlag.light ? lightTheme : darkTheme
+
+  const queryClient = new QueryClient()
 
   useEffect(() => {
     const storageTheme = getThemeFromStorage()
@@ -22,9 +25,11 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <BrowserRouter>
-          <Router />
-        </BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <Router />
+          </BrowserRouter>
+        </QueryClientProvider>
       </ThemeProvider>
     </>
   )
