@@ -1,18 +1,18 @@
 import React from 'react'
 import { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import ErrorBoundary from '@components/common/ErrorBoundary'
-import Test from '@pages/Home'
+import QueryBoundary from '@components/common/QueryBoundary'
+import Home from '@pages/Home'
 
 const Router = () => {
   return (
     <>
       <Suspense fallback={<></>}>
-        <ErrorBoundary fullback={<></>}>
+        <QueryBoundary>
           <Routes>
-            <Route path="/" element={<Test />} />
+            <Route path="/" element={<Home />} />
           </Routes>
-        </ErrorBoundary>
+        </QueryBoundary>
       </Suspense>
     </>
   )

@@ -1,30 +1,44 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react'
+import React, { Component, ErrorInfo, cloneElement, ReactElement } from 'react'
+import DefaultErrorFallBack from '@components/common/DefaultErrorFallBack'
 
 interface Props {
-  children: ReactNode
-  fullback: ReactNode
+  children: ReactElement
+  fallback?: ReactElement
+  resetQuery?: () => void
 }
 
 interface State {
   hasError: boolean
 }
+const initialState: State = { hasError: false }
 
 class ErrorBoundary extends Component<Props, State> {
-  public state: State = {
-    hasError: false,
+  constructor(props: Props) {
+    super(props)
+    this.state = initialState
   }
 
-  public static getDerivedStateFromError(_: Error): State {
+  static getDerivedStateFromError(_: Error): State {
     return { hasError: true }
   }
 
-  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+  resetBoundary = () => {
+    this.props.resetQuery?.()
+    this.setState(initialState)
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('Uncaught error:', error, errorInfo)
   }
 
-  public render() {
+  render() {
     if (this.state.hasError) {
-      return this.props.fullback
+      if (this.props.fallback) {
+        return cloneElement(this.props.fallback, {
+          resetBoundary: this.resetBoundary,
+        })
+      }
+      return <DefaultErrorFallBack resetBoundary={this.resetBoundary} />
     }
     return this.props.children
   }
