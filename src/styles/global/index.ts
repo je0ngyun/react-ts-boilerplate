@@ -1,8 +1,9 @@
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 import normalize from 'styled-normalize'
+import { Theme } from '@styles/theme'
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
   //${reset};
   //${normalize};
   * {
@@ -22,6 +23,10 @@ const GlobalStyle = createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: ${({ theme }) => theme.colors.background_color};
+    color: ${({ theme }) => theme.colors.text_color};
+    transition-property: background-color, color;
+    transition-duration: .5s;
   }
 
   code {

@@ -1,34 +1,16 @@
-import {
-  fontSizes,
-  device,
-  deviceSizes,
-  paddings,
-  margins,
-  interval,
-  verticalInterval,
-} from './common'
+import * as commons from './common'
 
 import { lightColors } from './lightColor'
 import { darkColors } from './darkColor'
 
 export const lightTheme = {
   colors: lightColors,
-  fontSizes,
-  deviceSizes,
-  device,
-  paddings,
-  margins,
-  interval,
-  verticalInterval,
+  ...commons,
 }
 
 export const darkTheme = {
   colors: darkColors,
-  fontSizes,
-  deviceSizes,
-  device,
-  paddings,
-  margins,
-  interval,
-  verticalInterval,
+  ...commons,
 }
+
+export type Theme = typeof lightTheme | typeof darkTheme

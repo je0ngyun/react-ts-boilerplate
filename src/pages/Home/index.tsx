@@ -5,7 +5,7 @@ import ThemeSwitch from '@components/ThemeSwitch'
 interface HomeProps {}
 
 const StDiv = styled.div`
-  background-color: ${({ theme }) => theme.colors.black};
+  font-size: ${({ theme }) => theme.fontSizes.xxl};
 `
 
 const Home = ({}: HomeProps) => {
