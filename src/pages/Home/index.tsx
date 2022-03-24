@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import ThemeSwitch from '@components/ThemeSwitch'
+import { useQuery } from 'react-query'
+import { api } from '../../api/index'
 
 interface HomeProps {}
 
@@ -9,10 +11,13 @@ const StDiv = styled.div`
 `
 
 const Home = ({}: HomeProps) => {
+  const { data } = useQuery('query', () => api.getUserInfo(), {
+    suspense: true,
+  })
   return (
     <>
       <ThemeSwitch />
-      <StDiv>Home</StDiv>
+      <StDiv>{data.star}</StDiv>
     </>
   )
 }

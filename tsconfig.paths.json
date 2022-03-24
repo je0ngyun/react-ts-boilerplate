@@ -9,7 +9,8 @@
       "@styles/*": ["src/styles/*"],
       "@utils/*": ["src/utils/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@store/*": ["src/stores/*"]
+      "@store/*": ["src/stores/*"],
+      "@api/*": ["src/api/*"]
     }
   }
 }

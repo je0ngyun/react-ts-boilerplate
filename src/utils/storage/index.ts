@@ -12,3 +12,11 @@ export const setThemeToStorage = (theme: ThemeFlag) => {
 export const getThemeFromStorage = () => {
   return getValueFromLocalStorage('theme')
 }
+
+export const setAccessTokenToStorage = (token: string) => {
+  setValueToLocalStorage('token', token)
+}
+
+export const getAccessTokenFromStorage = () => {
+  return getValueFromLocalStorage('token')
+}
