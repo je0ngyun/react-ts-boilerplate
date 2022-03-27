@@ -1,13 +1,15 @@
 import { AxiosError } from 'axios'
 import { publicAPI } from '../core'
-import { NotFoundError } from '../types/error'
+import { NotFoundError, UnauthorizedError } from '../types/error'
 
 //test
 export const getUserInfo = async () => {
-  const response = await publicAPI.get({
-    url: `/`,
-  })
-  if (response.axiosStatus === 404)
-    throw new NotFoundError('사용자를 찾을 수 없습니다.')
-  return response.data
+  try {
+    const response = await publicAPI.get({
+      url: `/`,
+    })
+    return response.data
+  } catch (e) {
+    throw new UnauthorizedError('권한이 없습니다.')
+  }
 }

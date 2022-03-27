@@ -5,12 +5,19 @@ import ErrorBoundary from '../ErrorBoundary'
 interface Props {
   children: ReactElement
   fallback?: ReactElement
+  ignoreCase?: number[]
 }
 
-const QueryBoundary = ({ children, fallback }: Props) => {
+const defaultIgnoreCase: number[] = [401]
+
+const QueryBoundary = ({ children, fallback, ignoreCase = [] }: Props) => {
   const { reset } = useQueryErrorResetBoundary()
   return (
-    <ErrorBoundary fallback={fallback} resetQuery={reset}>
+    <ErrorBoundary
+      fallback={fallback}
+      resetQuery={reset}
+      ignoreCase={new Set([...defaultIgnoreCase, ...ignoreCase])}
+    >
       {children}
     </ErrorBoundary>
   )

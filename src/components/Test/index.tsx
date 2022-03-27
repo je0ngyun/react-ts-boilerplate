@@ -1,0 +1,12 @@
+import React from 'react'
+import { api } from '../../api/index'
+import { useQuery } from 'react-query'
+
+const Test = () => {
+  const { data } = useQuery('query', () => api.getUserInfo(), {
+    suspense: true,
+    retry: false,
+  })
+  return <div>{data.star}</div>
+}
+export default Test

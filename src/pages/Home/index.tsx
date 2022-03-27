@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import ThemeSwitch from '@components/ThemeSwitch'
-import { useQuery } from 'react-query'
-import { api } from '../../api/index'
+import QueryBoundary from '@components/error/QueryBoundary'
+
+import Test from '@components/Test'
 
 interface HomeProps {}
 
@@ -11,13 +12,14 @@ const StDiv = styled.div`
 `
 
 const Home = ({}: HomeProps) => {
-  const { data } = useQuery('query', () => api.getUserInfo(), {
-    suspense: true,
-  })
   return (
     <>
       <ThemeSwitch />
-      <StDiv>{data.star}</StDiv>
+      <QueryBoundary>
+        <StDiv>
+          <Test />
+        </StDiv>
+      </QueryBoundary>
     </>
   )
 }
