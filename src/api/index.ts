@@ -1,3 +1,3 @@
-import { getUserInfo } from './userService/userInfo'
+import { userService } from './userService/'
 
-export const api = { getUserInfo }
+export const api = { userService }

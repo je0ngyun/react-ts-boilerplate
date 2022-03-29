@@ -3,7 +3,7 @@ import { api } from '../../api/index'
 import { useQuery } from 'react-query'
 
 const Test = () => {
-  const { data } = useQuery('query', () => api.getUserInfo(), {
+  const { data } = useQuery('query', () => api.userService.getUserInfo(), {
     suspense: true,
     retry: false,
   })

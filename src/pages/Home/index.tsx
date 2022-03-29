@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import ThemeSwitch from '@components/ThemeSwitch'
-import QueryBoundary from '@components/error/QueryBoundary'
-
+import QueryBoundary from '@components/Error/QueryBoundary'
 import Test from '@components/Test'
 
 interface HomeProps {}

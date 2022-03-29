@@ -1,19 +1,19 @@
 import React, { Component, ErrorInfo, cloneElement, ReactElement } from 'react'
-import DefaultErrorFallBack from '@components/error/DefaultErrorFallBack'
-import { CustomError } from '@api/types/error'
+import { CustomError, CustomErrorClass } from '@api/types/error'
 
 interface Props {
   children: ReactElement
-  fallback?: JSX.Element
+  fallback: JSX.Element
+  ignoreCase?: Set<CustomErrorClass>
   resetQuery?: () => void
-  ignoreCase?: Set<number>
 }
 
 interface State {
   hasError: boolean
-  errorCode: number | null
+  error: CustomError | null
 }
-const initialState: State = { hasError: false, errorCode: null }
+
+const initialState: State = { hasError: false, error: null }
 
 class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
@@ -22,31 +22,28 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   static getDerivedStateFromError(error: CustomError): State {
-    return { hasError: true, errorCode: error.code }
+    return { hasError: true, error: error }
   }
 
-  resetboundary = () => {
+  resetBoundary = () => {
     this.props.resetQuery?.()
     this.setState(initialState)
   }
 
-  componentDidCatch(error: CustomError, errorInfo: ErrorInfo) {
-    // error record
-  }
+  componentDidCatch(error: CustomError, errorInfo: ErrorInfo) {}
 
   isIgnoreCase() {
-    return this.props.ignoreCase?.has(this.state.errorCode as number)
+    return this.props.ignoreCase?.has(
+      this.state.error?.constructor as CustomErrorClass
+    )
   }
 
   render() {
     if (this.state.hasError && !this.isIgnoreCase()) {
-      if (this.props.fallback) {
-        return cloneElement(this.props.fallback, {
-          resetboundary: this.resetboundary,
-          errorCode: this.state.errorCode,
-        })
-      }
-      return <DefaultErrorFallBack resetboundary={this.resetboundary} />
+      return cloneElement(this.props.fallback, {
+        resetBoundary: this.resetBoundary,
+        error: this.state.error,
+      })
     }
     return this.props.children
   }

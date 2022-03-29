@@ -1,22 +1,25 @@
 import React, { useEffect } from 'react'
+import { CustomError, NotFoundError, UnauthorizedError } from '@api/types/error'
 
 interface Props {
-  errorCode?: number
+  error?: CustomError
 }
-
-const GlobalErrorFallBack = ({ errorCode }: Props) => {
+const GlobalErrorFallBack = ({ error }: Props) => {
+  let render = null
   ;(function () {
-    switch (errorCode) {
-      case 401:
+    switch (error?.constructor) {
+      case UnauthorizedError:
         window.location.href = './login?expire'
+        break
+      case NotFoundError:
+        render = <div>404 Error</div>
+        break
     }
   })()
-  return (
-    <div>
-      전역에러 fall Back
-      {errorCode}
-    </div>
-  )
+  if (render) {
+    return render
+  }
+  return <>Uncatched</>
 }
 
 export default GlobalErrorFallBack

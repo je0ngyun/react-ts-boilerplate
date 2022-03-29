@@ -1,22 +1,26 @@
 import React, { ReactElement } from 'react'
 import { useQueryErrorResetBoundary } from 'react-query'
 import ErrorBoundary from '../ErrorBoundary'
+import DefaultErrorFallBack from '@components/Error/DefaultQueryFallBack'
+import { CustomErrorClass, UnauthorizedError } from '@api/types/error'
 
 interface Props {
   children: ReactElement
-  fallback?: ReactElement
-  ignoreCase?: number[]
+  fallback?: JSX.Element
+  ignoreCase?: Array<CustomErrorClass>
 }
 
-const defaultIgnoreCase: number[] = [401]
-
-const QueryBoundary = ({ children, fallback, ignoreCase = [] }: Props) => {
+const QueryBoundary = ({
+  children,
+  fallback,
+  ignoreCase = [UnauthorizedError],
+}: Props) => {
   const { reset } = useQueryErrorResetBoundary()
   return (
     <ErrorBoundary
-      fallback={fallback}
+      fallback={fallback || <DefaultErrorFallBack />}
+      ignoreCase={new Set(ignoreCase)}
       resetQuery={reset}
-      ignoreCase={new Set([...defaultIgnoreCase, ...ignoreCase])}
     >
       {children}
     </ErrorBoundary>

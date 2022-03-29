@@ -2,6 +2,10 @@ export interface CustomError extends Error {
   code: number
 }
 
+export interface CustomErrorClass {
+  new (message: string, ...args: any[]): Error
+}
+
 export class NotFoundError implements CustomError {
   code: 404
   name: 'Not Found Error'
