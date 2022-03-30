@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
-import { CustomError, NotFoundError, UnauthorizedError } from '@api/types/error'
+import React from 'react'
+import { NotFoundError, UnauthorizedError } from '@api/types/error'
 
 interface Props {
-  error?: CustomError
+  error?: Error
 }
 const GlobalErrorFallBack = ({ error }: Props) => {
   let render = null

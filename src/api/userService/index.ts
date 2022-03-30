@@ -4,9 +4,16 @@ import { NotFoundError, UnauthorizedError } from '../types/error'
 
 export const userService = {
   getUserInfo: async () => {
-    const response = await publicAPI.get({
-      url: `/`,
-    })
-    return response.data
+    try {
+      const response = await publicAPI.get({
+        url: `/`,
+      })
+      return response.data
+    } catch (error) {
+      if ((error as AxiosError).response?.status === 401) {
+        throw new UnauthorizedError('권한이 없는 사용자입니다.')
+      }
+      throw error
+    }
   },
 }
