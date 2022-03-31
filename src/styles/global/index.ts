@@ -12,9 +12,9 @@ const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
 
   html,
   body {
-    max-width: 390px;
+    width: 100%;
     height: 100%;
-    margin: 0px auto;
+    position: relative;
   }
 
   body {

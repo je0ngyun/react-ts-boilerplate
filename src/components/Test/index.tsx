@@ -7,6 +7,6 @@ const Test = () => {
     suspense: true,
     retry: false,
   })
-  return <div>{data.star}</div>
+  return <div>{data.name}</div>
 }
 export default Test

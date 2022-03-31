@@ -1,9 +1,15 @@
-import React, { Component, ErrorInfo, cloneElement, ReactElement } from 'react'
+import React, {
+  Component,
+  ErrorInfo,
+  cloneElement,
+  ReactElement,
+  ReactNode,
+} from 'react'
 import { CustomErrorClass } from '@api/types/error'
 
 interface Props {
-  children: ReactElement
-  fallback: JSX.Element
+  children: ReactNode
+  fallback: ReactElement
   ignoreError?: Set<CustomErrorClass>
   resetQuery?: () => void
 }

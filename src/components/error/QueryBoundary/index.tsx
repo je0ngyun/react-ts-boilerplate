@@ -1,13 +1,13 @@
-import React, { ReactElement, Suspense } from 'react'
+import React, { ReactElement, ReactNode, Suspense } from 'react'
 import { useQueryErrorResetBoundary } from 'react-query'
 import ErrorBoundary from '@components/Error/ErrorBoundary'
 import DefaultErrorFallBack from '@components/Error/DefaultQueryFallBack'
 import { CustomErrorClass, UnauthorizedError } from '@api/types/error'
 
 interface Props {
-  children: ReactElement
+  children: ReactNode
   loadingFallback?: ReactElement
-  errorFallback?: JSX.Element
+  errorFallback?: ReactElement
   ignoreError?: CustomErrorClass[]
 }
 
