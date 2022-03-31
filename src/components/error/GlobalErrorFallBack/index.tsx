@@ -16,10 +16,7 @@ const GlobalErrorFallBack = ({ error }: Props) => {
         break
     }
   })()
-  if (render) {
-    return render
-  }
-  return <>Uncatched</>
+  return <>{render}</>
 }
 
 export default GlobalErrorFallBack

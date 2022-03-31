@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, Suspense } from 'react'
 import { useQueryErrorResetBoundary } from 'react-query'
 import ErrorBoundary from '@components/Error/ErrorBoundary'
 import DefaultErrorFallBack from '@components/Error/DefaultQueryFallBack'
@@ -6,23 +6,27 @@ import { CustomErrorClass, UnauthorizedError } from '@api/types/error'
 
 interface Props {
   children: ReactElement
-  fallback?: JSX.Element
-  ignoreError?: Array<CustomErrorClass>
+  loadingFallback?: ReactElement
+  errorFallback?: JSX.Element
+  ignoreError?: CustomErrorClass[]
 }
+
+const defaultIgnoreError: CustomErrorClass[] = [UnauthorizedError]
 
 const QueryBoundary = ({
   children,
-  fallback,
-  ignoreError = [UnauthorizedError],
+  loadingFallback,
+  errorFallback,
+  ignoreError = [],
 }: Props) => {
   const { reset } = useQueryErrorResetBoundary()
   return (
     <ErrorBoundary
-      fallback={fallback || <DefaultErrorFallBack />}
-      ignoreError={new Set(ignoreError)}
+      fallback={errorFallback || <DefaultErrorFallBack />}
+      ignoreError={new Set([...defaultIgnoreError, ...ignoreError])}
       resetQuery={reset}
     >
-      {children}
+      <Suspense fallback={loadingFallback || <></>}>{children}</Suspense>
     </ErrorBoundary>
   )
 }

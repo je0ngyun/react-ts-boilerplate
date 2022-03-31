@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import styled from 'styled-components'
 import ThemeSwitch from '@components/ThemeSwitch'
 import QueryBoundary from '@components/Error/QueryBoundary'
@@ -14,7 +14,7 @@ const Home = ({}: HomeProps) => {
   return (
     <>
       <ThemeSwitch />
-      <QueryBoundary>
+      <QueryBoundary loadingFallback={<>loading...</>}>
         <StDiv>
           <Test />
         </StDiv>

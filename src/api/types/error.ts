@@ -3,7 +3,7 @@ export interface CustomError extends Error {
 }
 
 export interface CustomErrorClass {
-  new (message: string, ...args: any[]): Error
+  new (message: string, ...args: any[]): CustomError
 }
 
 export class NotFoundError implements CustomError {
