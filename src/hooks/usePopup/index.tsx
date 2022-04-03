@@ -8,12 +8,12 @@ interface OpenProps {
   cancelButton?: boolean
 }
 
-const outAnimation = (
+const execOutAnimation = (
   container: HTMLDivElement | null,
   content: HTMLDivElement | null
 ) => {
-  content !== null && content.classList.add('slide-down')
-  container !== null && container.classList.add('fade-out')
+  content?.classList.add('slide-down')
+  container?.classList.add('fade-out')
 }
 
 const usePopup = () => {
@@ -26,7 +26,7 @@ const usePopup = () => {
     document.body.appendChild(node)
 
     const handleConfirm = () => {
-      outAnimation(container.current, content.current)
+      execOutAnimation(container.current, content.current)
       setTimeout(() => {
         ReactDOM.unmountComponentAtNode(node)
         deferred.resolve(true)
@@ -35,7 +35,7 @@ const usePopup = () => {
     }
 
     const handleCancle = () => {
-      outAnimation(container.current, content.current)
+      execOutAnimation(container.current, content.current)
       setTimeout(() => {
         ReactDOM.unmountComponentAtNode(node)
         deferred.resolve(false)
