@@ -15,11 +15,10 @@ const useToast = () => {
     document.body.appendChild(node)
     ReactDOM.render(<Toast content={content} containerRef={container} />, node)
 
-    setTimeout(() => {
-      execOutAnimation(container.current).then(() => {
-        ReactDOM.unmountComponentAtNode(node)
-        node.remove()
-      })
+    setTimeout(async () => {
+      await execOutAnimation(container.current)
+      ReactDOM.unmountComponentAtNode(node)
+      node.remove()
     }, delay)
   }
   return { fireToast }
