@@ -6,8 +6,8 @@ export const StToast = styled.div`
   align-items: center;
   position: fixed;
   width: 90%;
-  min-height: 30px;
-  top: 90%;
+  min-height: 50px;
+  top: 92%;
   left: calc(-50vw + 50%);
   right: calc(-50vw + 50%);
   margin-left: auto;

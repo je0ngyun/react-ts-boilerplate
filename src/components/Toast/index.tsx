@@ -3,11 +3,12 @@ import { StToast } from './style'
 
 interface Props {
   content: string
-  containerRef: React.RefObject<HTMLDivElement>
 }
 
-const Toast = ({ content, containerRef }: Props) => {
-  return <StToast ref={containerRef}>{content}</StToast>
-}
+const Toast = React.forwardRef<HTMLDivElement, Props>(({ content }, ref) => {
+  return <StToast ref={ref}>{content}</StToast>
+})
+
+Toast.displayName = 'Toast'
 
 export default Toast

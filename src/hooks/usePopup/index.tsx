@@ -8,17 +8,12 @@ interface OpenProps {
   cancelButton?: boolean
 }
 
-const execOutAnimation = (
-  container: HTMLDivElement | null,
-  content: HTMLDivElement | null
-) => {
-  content?.classList.add('slide-down')
-  container?.classList.add('fade-out')
+const execOutAnimation = (container: HTMLDivElement | null) => {
+  container?.classList.add('slide-down')
 }
 
 const usePopup = () => {
   const container = useRef<HTMLDivElement>(null)
-  const content = useRef<HTMLDivElement>(null)
 
   const openPopup = async ({ render, cancelButton = true }: OpenProps) => {
     const deferred = new Deffered()
@@ -26,29 +21,28 @@ const usePopup = () => {
     document.body.appendChild(node)
 
     const handleConfirm = () => {
-      execOutAnimation(container.current, content.current)
+      execOutAnimation(container.current)
       setTimeout(() => {
         ReactDOM.unmountComponentAtNode(node)
         deferred.resolve(true)
         node.remove()
-      }, 220)
+      }, 150)
     }
 
     const handleCancle = () => {
-      execOutAnimation(container.current, content.current)
+      execOutAnimation(container.current)
       setTimeout(() => {
         ReactDOM.unmountComponentAtNode(node)
         deferred.resolve(false)
         node.remove()
-      }, 220)
+      }, 150)
     }
 
     ReactDOM.render(
       <Popup
         render={render}
         cancelButton={cancelButton}
-        containerRef={container}
-        contentRef={content}
+        ref={container}
         handleCancle={handleCancle}
         handleConfirm={handleConfirm}
       />,
@@ -56,7 +50,7 @@ const usePopup = () => {
     )
     return await deferred
   }
-  return openPopup
+  return { openPopup }
 }
 
 export default usePopup

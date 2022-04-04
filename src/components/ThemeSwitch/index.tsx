@@ -16,7 +16,7 @@ const ThemeSwitch = () => {
     }
   }
 
-  return <button onClick={handleClick}>switch</button>
+  return <button onClick={handleClick}>Theme Switch</button>
 }
 
 export default ThemeSwitch

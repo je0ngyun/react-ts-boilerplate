@@ -13,7 +13,7 @@ const useToast = () => {
   const fireToast = (content: string, delay: number) => {
     const node = document.createElement('div')
     document.body.appendChild(node)
-    ReactDOM.render(<Toast content={content} containerRef={container} />, node)
+    ReactDOM.render(<Toast content={content} ref={container} />, node)
 
     setTimeout(async () => {
       await execOutAnimation(container.current)

@@ -9,6 +9,7 @@ export const StPopupContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
   top: 0;
   left: 0;
   right: 0;
@@ -16,7 +17,7 @@ export const StPopupContainer = styled.div`
   padding: 15px;
   backdrop-filter: blur(2px);
 
-  animation-duration: 0.25s;
+  animation-duration: 0.15s;
   animation-timing-function: ease-out;
   animation-name: ${fadeIn};
   animation-fill-mode: forwards;
@@ -40,7 +41,7 @@ export const StPopup = styled.div`
   background-color: #c0c7da;
   box-shadow: 5px 10px 10px 1px rgba(0, 0, 0, 0.3);
 
-  animation-duration: 0.25s;
+  animation-duration: 0.15s;
   animation-timing-function: ease-out;
   animation-name: ${slideUp('200px')};
   animation-fill-mode: forwards;

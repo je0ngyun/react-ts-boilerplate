@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import ThemeSwitch from '@components/ThemeSwitch'
 import QueryBoundary from '@components/Error/QueryBoundary'
 import useToast from '@hooks/useToast'
+import usePopup from '@hooks/usePopup'
 import Test from '@components/Test'
 
 interface HomeProps {}
@@ -13,8 +14,14 @@ const StDiv = styled.div`
 
 const Home = ({}: HomeProps) => {
   const { fireToast } = useToast()
-  const handleBtnClick = () => {
+  const { openPopup } = usePopup()
+
+  const handleToastFire = () => {
     fireToast('토스트 입니다.', 1500)
+  }
+
+  const handleOpenPopup = async () => {
+    await openPopup({ render: <div>팝업내용 컴포넌트</div> })
   }
 
   return (
@@ -22,7 +29,8 @@ const Home = ({}: HomeProps) => {
       <ThemeSwitch />
       <QueryBoundary loadingFallback={<>loading...</>}>
         <StDiv>{/* <Test /> */}</StDiv>
-        <button onClick={handleBtnClick}>토스트 실행</button>
+        <button onClick={handleToastFire}>Fire Toast</button>
+        <button onClick={handleOpenPopup}>Open Popup</button>
       </QueryBoundary>
     </>
   )
