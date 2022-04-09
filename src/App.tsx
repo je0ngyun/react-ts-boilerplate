@@ -34,8 +34,8 @@ function App() {
             <BrowserRouter>
               <Router />
             </BrowserRouter>
-            <Footer />
           </Main>
+          <Footer />
         </QueryClientProvider>
       </ThemeProvider>
     </>
