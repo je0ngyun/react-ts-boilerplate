@@ -8,7 +8,7 @@ const PrivateRouter = () => {
   const location = useLocation()
   const loginStateCheck = () => {
     const { isAuthenticated } = useLoginUser()
-    return isAuthenticated ? <Outlet /> : <Navigate to="/" />
+    return isAuthenticated ? <Outlet /> : <Navigate to="/login?need" />
   }
   return (
     <ErrorBoundary key={location.pathname} fallback={<GlobalErrorFallBack />}>
