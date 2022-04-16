@@ -5,8 +5,10 @@ import { useQuery } from 'react-query'
 const Test = () => {
   const { data } = useQuery('query', () => api.userService.getUserInfo(), {
     suspense: true,
+    staleTime: Infinity,
     retry: false,
   })
-  return <div>{data.name}</div>
+  console.log(data)
+  return <div>{data?.name}</div>
 }
 export default Test
