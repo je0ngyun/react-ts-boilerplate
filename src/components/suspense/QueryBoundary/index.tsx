@@ -8,8 +8,8 @@ import React, {
   useImperativeHandle,
 } from 'react'
 import { useQueryErrorResetBoundary } from 'react-query'
-import ErrorBoundary from '@components/Error/ErrorBoundary'
-import DefaultErrorFallBack from '@components/Error/DefaultQueryFallBack'
+import ErrorBoundary from '@components/suspense/ErrorBoundary'
+import DefaultErrorFallBack from '@components/suspense/DefaultQueryFallBack'
 import { CustomErrorClass, UnauthorizedError } from '@api/types/error'
 
 interface Props {

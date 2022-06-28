@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import ReactDOM from 'react-dom'
-import Toast from '@components/Toast'
+import Toast from '@components/utils/Toast'
 
 const execOutAnimation = (container: HTMLDivElement | null) =>
   new Promise((res) => {

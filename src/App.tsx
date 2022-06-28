@@ -8,9 +8,10 @@ import { ThemeProvider } from 'styled-components'
 import GlobalStyle from '@styles/global'
 import { lightTheme, darkTheme } from '@styles/theme'
 import { getThemeFromStorage } from '@utils/storage'
-import Header from './components/Layout/Header/index'
-import Main from '@components/Layout/Main'
-import Footer from '@components/Layout/Footer'
+import AuthContext from '@components/auth/AuthContext'
+import Header from './components/layout/Header/index'
+import Main from '@components/layout/Main'
+import Footer from '@components/layout/Footer'
 
 function App() {
   const [currentTheme, setCurrentTheme] = useRecoilState(themeState)
@@ -32,7 +33,9 @@ function App() {
           <Header />
           <Main>
             <BrowserRouter>
-              <Router />
+              <AuthContext>
+                <Router />
+              </AuthContext>
             </BrowserRouter>
           </Main>
           <Footer />

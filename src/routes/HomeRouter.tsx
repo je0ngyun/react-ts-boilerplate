@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import PrivateRouter from './common/PrivateRouter'
+import PrivateRouter from './utils/PrivateRouter'
 import Home from '@pages/Home'
 
 const HomeRouter = () => {

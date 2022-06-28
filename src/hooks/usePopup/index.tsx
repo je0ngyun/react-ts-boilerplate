@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import ReactDOM from 'react-dom'
 import Deffered from '@utils/deferred'
-import Popup from '@components/Popup'
+import Popup from '@components/utils/Popup'
 
 interface OpenProps {
   render: JSX.Element
