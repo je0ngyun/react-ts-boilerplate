@@ -2,6 +2,8 @@ import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 import normalize from 'styled-normalize'
 import { Theme } from '@styles/theme'
+import 'antd/dist/antd.less'
+import '@styles/antdCustomize/index.less'
 
 const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
   //${reset};
