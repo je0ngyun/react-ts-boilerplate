@@ -7,21 +7,26 @@ const TestModalContent = styled.div`
   height: 400px;
 `
 
-const TestModalComponent = ({ onConfirm }: any) => {
+const TestModalComponent = ({ onConfirm, onCancel }: any) => {
   return (
     <TestModalContent>
-      <div>테스트</div>
+      <div>TEST Modal</div>
       <button onClick={onConfirm}>OK</button>
+      <button onClick={onCancel}>Cancel</button>
     </TestModalContent>
   )
 }
 
 const LandingPage = () => {
-  const [showModal, setModalContent] = useModal(<TestModalComponent />)
+  const [showModal] = useModal()
 
+  const asyncModal = async () => {
+    const flag = await showModal(<TestModalComponent />)
+    console.log(flag)
+  }
   return (
     <>
-      <button onClick={showModal}>모달</button>
+      <button onClick={() => asyncModal()}>Modal</button>
     </>
   )
 }

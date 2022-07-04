@@ -1,23 +1,33 @@
 import React, { useState, cloneElement } from 'react'
 import { Modal } from 'antd'
+import Deffered from '@utils/deferred'
 
-const useModal = (content: React.ReactElement) => {
-  const [modalContent, setModalContent] = useState<React.ReactNode>(content)
-
-  const showModal = () => {
-    if (content === null) return
+const useModal = () => {
+  const showModal = async (content: React.ReactElement) => {
+    const deferred = new Deffered()
     const modal = Modal.success({
       title: false,
       transitionName: 'slidedown',
       centered: true,
+      getContainer: '#root',
     })
+    const onConfirm = () => {
+      modal.destroy()
+      deferred.resolve(true)
+    }
+    const onCancel = () => {
+      modal.destroy()
+      deferred.resolve(false)
+    }
     modal.update({
-      content: cloneElement(modalContent as React.ReactElement, {
-        onConfirm: modal.destroy,
+      content: cloneElement(content, {
+        onConfirm,
+        onCancel,
       }),
     })
+    return await deferred
   }
-  return [showModal, setModalContent]
+  return [showModal]
 }
 
 export default useModal
