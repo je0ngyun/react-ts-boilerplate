@@ -5,6 +5,7 @@ import { createContext, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { defaultValue } from '@store/loginUser'
+import { LoginUser } from '@api/types/user'
 
 export const AuthContext = createContext<any>(null)
 
@@ -16,7 +17,7 @@ export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useRecoilState(loginUserState)
   const navigate = useNavigate()
 
-  const login = async (data: any) => {
+  const login = async (data: LoginUser) => {
     setUser(data)
     navigate('/home')
   }
