@@ -1,30 +1,81 @@
-import React, { useState, cloneElement } from 'react'
+import React, { cloneElement, useCallback } from 'react'
 import { Modal } from 'antd'
 import Deffered from '@utils/deferred'
+import { useRecoilBridgeAcrossReactRoots_UNSTABLE } from 'recoil'
+import { QueryClientProvider, useQueryClient } from 'react-query'
 
-const useModal = () => {
+interface ShowModalOptions {
+  recoil?: boolean
+  reactQuery?: boolean
+}
+
+const useModal = ({ recoil, reactQuery } = {} as ShowModalOptions) => {
+  const RecoilBridge = useRecoilBridgeAcrossReactRoots_UNSTABLE()
+  const queryClient = useQueryClient()
+
+  const getLinkedContent = useCallback(
+    (
+      content: React.ReactElement,
+      { recoil, reactQuery } = {} as ShowModalOptions
+    ) => {
+      if (!recoil && !reactQuery) {
+        return <>{content}</>
+      }
+      if (recoil && reactQuery) {
+        return (
+          <QueryClientProvider client={queryClient}>
+            <RecoilBridge>{content}</RecoilBridge>
+          </QueryClientProvider>
+        )
+      }
+      if (reactQuery) {
+        return (
+          <QueryClientProvider client={queryClient}>
+            {content}
+          </QueryClientProvider>
+        )
+      }
+      if (recoil) {
+        return <RecoilBridge>{content}</RecoilBridge>
+      }
+    },
+    []
+  )
+
   const showModal = async (content: React.ReactElement) => {
     const deferred = new Deffered()
+
     const modal = Modal.success({
       title: false,
       transitionName: 'slidedown',
       centered: true,
       getContainer: '#root',
     })
-    const onConfirm = () => {
+
+    const onConfirm = (resValue: any) => {
       modal.destroy()
-      deferred.resolve(true)
+      deferred.resolve(resValue)
     }
-    const onCancel = () => {
+
+    const onCancel = (rejValue: any) => {
       modal.destroy()
-      deferred.resolve(false)
+      deferred.resolve(rejValue)
     }
-    modal.update({
-      content: cloneElement(content, {
-        onConfirm,
-        onCancel,
-      }),
+
+    const attachedModalMethod = cloneElement(content, {
+      onConfirm,
+      onCancel,
     })
+
+    const LinkedContent = getLinkedContent(attachedModalMethod, {
+      recoil,
+      reactQuery,
+    })
+
+    modal.update({
+      content: LinkedContent,
+    })
+
     return await deferred
   }
   return [showModal]

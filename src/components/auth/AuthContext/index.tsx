@@ -35,14 +35,8 @@ export const AuthProvider = ({ children }: Props) => {
     }),
     [user]
   )
-  useEffect(() => {
-    setTimeout(() => {
-      setUser(null)
-    }, 1500)
-  }, [])
-  return (
-    <AuthContext.Provider value={value as any}>{children}</AuthContext.Provider>
-  )
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
 export default AuthProvider

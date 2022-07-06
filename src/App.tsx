@@ -9,6 +9,7 @@ import GlobalStyle from '@styles/global'
 import { lightTheme, darkTheme } from '@styles/theme'
 import { getThemeFromStorage } from '@utils/storage'
 import AuthContext from '@components/auth/AuthContext'
+import { ReactQueryDevtools } from 'react-query/devtools'
 import Header from './components/layout/Header/index'
 import Main from '@components/layout/Main'
 import Footer from '@components/layout/Footer'
@@ -39,6 +40,7 @@ function App() {
             </BrowserRouter>
           </Main>
           <Footer />
+          <ReactQueryDevtools />
         </QueryClientProvider>
       </ThemeProvider>
     </>
