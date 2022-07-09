@@ -32,6 +32,7 @@ const TestModalComponent = ({ onConfirm, onCancel }: any) => {
 
 const LandingPage = () => {
   const [showModal] = useModal({ recoil: true, reactQuery: true })
+
   const asyncModal = async () => {
     const flag = await showModal(<TestModalComponent />)
     console.log(flag)

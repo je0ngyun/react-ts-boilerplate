@@ -1,5 +1,4 @@
 import { AxiosError } from 'axios'
-import { NotFoundError, UnauthorizedError } from '../types/error'
 
 export const throwError = (error: unknown) => {
   const status = (error as AxiosError).response?.status

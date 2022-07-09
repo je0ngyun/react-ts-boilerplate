@@ -5,7 +5,6 @@ import { createContext, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { defaultValue } from '@store/loginUser'
-import { LoginUser } from '@api/types/user'
 
 export const AuthContext = createContext<any>(null)
 

@@ -1,12 +1,12 @@
-export interface CustomError extends Error {
+interface CustomError extends Error {
   code: number
 }
 
-export interface CustomErrorClass {
+interface CustomErrorClass {
   new (message: string, ...args: any[]): CustomError
 }
 
-export class NotFoundError implements CustomError {
+class NotFoundError implements CustomError {
   code: 404
   name: 'Not Found Error'
   message: string
@@ -18,7 +18,7 @@ export class NotFoundError implements CustomError {
   }
 }
 
-export class UnauthorizedError implements CustomError {
+class UnauthorizedError implements CustomError {
   code: 401
   name: 'Unauthorized Error'
   message: string

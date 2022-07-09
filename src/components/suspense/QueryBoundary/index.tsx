@@ -10,7 +10,6 @@ import React, {
 import { useQueryErrorResetBoundary } from 'react-query'
 import ErrorBoundary from '@components/suspense/ErrorBoundary'
 import DefaultErrorFallBack from '@components/suspense/DefaultQueryFallBack'
-import { CustomErrorClass, UnauthorizedError } from '@api/types/error'
 
 interface Props {
   children: ReactNode

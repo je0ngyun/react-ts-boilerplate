@@ -1,9 +1,9 @@
-import { UserService } from '@api/userService'
+import { UserService } from '@api/service/userService'
 
 export const userDataMock = (): UserService => ({
   getUserInfo: async () => {
     await wait(1500)
-    return { name: 'jeongyun' }
+    return {} as LoginUser
   },
 })
 

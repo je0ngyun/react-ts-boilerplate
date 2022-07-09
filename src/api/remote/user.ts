@@ -1,5 +1,5 @@
-import { publicAPI } from '../core'
-import { UserService } from '@api/userService'
+import { publicAPI } from '@api/core'
+import { UserService } from '@api/service/userService'
 import { throwError } from '@api/utils/throwError'
 
 export const userDataRemote = (): UserService => ({

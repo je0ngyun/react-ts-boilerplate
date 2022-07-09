@@ -1,4 +1,3 @@
-import { LoginUser } from '@api/types/user'
 import { atom } from 'recoil'
 
 export const defaultValue = {

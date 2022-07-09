@@ -1,5 +1,4 @@
 import React from 'react'
-import { NotFoundError, UnauthorizedError } from '@api/types/error'
 import { Navigate } from 'react-router-dom'
 
 interface Props {

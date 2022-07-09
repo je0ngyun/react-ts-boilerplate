@@ -5,7 +5,6 @@ import React, {
   ReactElement,
   ReactNode,
 } from 'react'
-import { CustomErrorClass } from '@api/types/error'
 
 interface Props {
   children: ReactNode
