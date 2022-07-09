@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAuth } from '@hooks/useAuth'
 import { Navigate, Outlet } from 'react-router-dom'
 
 const PraviteRouter = () => {
   const { user } = useAuth()
+
+  console.log(user)
 
   if (user === undefined) {
     return <>Loading</>
@@ -12,8 +14,6 @@ const PraviteRouter = () => {
   if (user === null) {
     return <Navigate to="/" />
   }
-
-  console.log(user)
 
   return (
     <>

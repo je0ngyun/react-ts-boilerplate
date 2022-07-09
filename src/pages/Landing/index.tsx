@@ -1,7 +1,9 @@
+import React, { useEffect } from 'react'
 import useModal from '@hooks/useModal'
 import styled from 'styled-components'
-import React, { useState } from 'react'
-import { useQuery, useQueryClient } from 'react-query'
+import { useQuery } from 'react-query'
+import { useAuth } from '@hooks/useAuth'
+import { defaultLoginValue } from '@store/loginUser'
 
 const TestModalContent = styled.div`
   width: 400px;
@@ -32,14 +34,24 @@ const TestModalComponent = ({ onConfirm, onCancel }: any) => {
 
 const LandingPage = () => {
   const [showModal] = useModal({ recoil: true, reactQuery: true })
+  const { login, logout, user } = useAuth()
 
   const asyncModal = async () => {
     const flag = await showModal(<TestModalComponent />)
     console.log(flag)
   }
+
+  useEffect(() => {
+    console.log(!!user)
+  }, [user])
+
   return (
     <>
       <button onClick={() => asyncModal()}>Modal</button>
+      {user && <button onClick={() => logout()}>로그아웃</button>}
+      {!user && (
+        <button onClick={() => login(defaultLoginValue)}>로그인</button>
+      )}
     </>
   )
 }
