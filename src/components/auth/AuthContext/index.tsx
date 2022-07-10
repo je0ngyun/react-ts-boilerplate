@@ -6,13 +6,19 @@ import { useNavigate } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { defaultLoginValue } from '@store/loginUser'
 
-type ContextMethods = {
+export interface ContextValues {
   user: LoginUser | null | undefined
   login: (data: LoginUser) => void
   logout: () => void
-} | null
+}
 
-export const AuthContext = createContext<ContextMethods>(null)
+const contextDefaultValue = {
+  user: undefined,
+  login: () => {},
+  logout: () => {},
+}
+
+export const AuthContext = createContext<ContextValues>(contextDefaultValue)
 
 interface Props {
   children: ReactNode
@@ -48,7 +54,7 @@ export const AuthProvider = ({ children }: Props) => {
     //2.1 리프레시 토큰 검증 성공 -> setUser(user)
     setTimeout(() => setUser(defaultLoginValue), 1000)
     //2.2 리프레시 토큰 검증 실패 -> setUser(null)
-    //setTimeout(() => setUser(null), 1000)
+    ////setTimeout(() => setUser(null), 1000)
   }, [])
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
