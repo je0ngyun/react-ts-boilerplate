@@ -1,13 +1,19 @@
 import React, { useEffect } from 'react'
 import useModal from '@hooks/useModal'
-import styled from 'styled-components'
 import { useQuery } from 'react-query'
 import { useAuth } from '@hooks/useAuth'
 import { defaultLoginValue } from '@store/loginUser'
 
+import styled from 'styled-components'
+import tw from 'twin.macro'
+
 const TestModalContent = styled.div`
   width: 400px;
   height: 400px;
+`
+
+const TestButton = styled.button`
+  ${tw`p-4`}
 `
 
 const fetchTestData = async () => {
@@ -47,7 +53,7 @@ const LandingPage = () => {
 
   return (
     <>
-      <button onClick={() => asyncModal()}>Modal</button>
+      <TestButton onClick={() => asyncModal()}>Modal</TestButton>
       {user && <button onClick={() => logout()}>로그아웃</button>}
       {!user && (
         <button onClick={() => login(defaultLoginValue)}>로그인</button>

@@ -4,6 +4,7 @@ import normalize from 'styled-normalize'
 import { Theme } from '@styles/theme'
 import 'antd/dist/antd.less'
 import '@styles/antdCustomize/index.less'
+import 'tailwindcss/tailwind.css'
 
 const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
   //${reset};
