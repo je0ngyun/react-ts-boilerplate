@@ -6,7 +6,13 @@ import { useNavigate } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { defaultLoginValue } from '@store/loginUser'
 
-export const AuthContext = createContext<any>(null)
+type ContextMethods = {
+  user: LoginUser | null | undefined
+  login: (data: LoginUser) => void
+  logout: () => void
+} | null
+
+export const AuthContext = createContext<ContextMethods>(null)
 
 interface Props {
   children: ReactNode
