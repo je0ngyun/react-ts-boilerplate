@@ -1,4 +1,4 @@
-import React, { cloneElement, useCallback } from 'react'
+import React, { cloneElement, useCallback, useState } from 'react'
 import { Modal } from 'antd'
 import Deffered from '@utils/deferred'
 import { useRecoilBridgeAcrossReactRoots_UNSTABLE } from 'recoil'
@@ -9,7 +9,14 @@ interface ShowModalOptions {
   reactQuery?: boolean
 }
 
+interface ModalInstance {
+  destroy: () => void
+}
+
 const useModal = ({ recoil, reactQuery } = {} as ShowModalOptions) => {
+  const [currentModalInstance, setCurrentModalInstance] = useState<
+    ModalInstance | undefined
+  >()
   const RecoilBridge = useRecoilBridgeAcrossReactRoots_UNSTABLE()
   const queryClient = useQueryClient()
 
